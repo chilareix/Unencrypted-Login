@@ -8,10 +8,10 @@
 
 <AnchorPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <TextField fx:id="un" layoutX="101.0" layoutY="14.0" prefHeight="25.0" prefWidth="210.0" promptText="Username" />
-      <PasswordField fx:id="pw" layoutX="101.0" layoutY="50.0" prefHeight="25.0" prefWidth="210.0" promptText="Password" />
+      <TextField fx:id="username" layoutX="101.0" layoutY="14.0" prefHeight="25.0" prefWidth="210.0" promptText="Username" />
+      <PasswordField fx:id="password" layoutX="101.0" layoutY="50.0" prefHeight="25.0" prefWidth="210.0" promptText="Password" />
       <Button fx:id="reg" layoutX="250.0" layoutY="111.0" mnemonicParsing="false" onAction="#register" text="Register" />
       <Button fx:id="li" layoutX="100.0" layoutY="111.0" mnemonicParsing="false" onAction="#login" text="Login" />
-      <Label fx:id="attempt" alignment="CENTER" layoutX="101.0" layoutY="85.0" prefHeight="17.0" prefWidth="210.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="loginText" alignment="CENTER" layoutX="101.0" layoutY="85.0" prefHeight="17.0" prefWidth="210.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

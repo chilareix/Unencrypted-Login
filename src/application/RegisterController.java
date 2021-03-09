@@ -26,45 +26,50 @@ public class RegisterController {
 	
 	//Scene items so they can be altered 
 	@FXML
-	private PasswordField pw = new PasswordField();
+	private PasswordField password = new PasswordField();
 	@FXML
-	private PasswordField pw2 = new PasswordField();
+	private PasswordField password2 = new PasswordField();
 	@FXML
-	private TextField un = new TextField();
+	private TextField username = new TextField();
 	@FXML
-	private Label pwReq = new Label();
+	private Label passRequirements = new Label();
 	@FXML
-	private Label pwrNoMatch = new Label();
+	private Label registerError = new Label();
 	
 	//REGEX
 	//Determine if the password is "secure enough"
-	Pattern secPat = Pattern.compile("\\w\\d");
-	Matcher secMat;
+	private Pattern securityPattern = Pattern.compile("\\w\\d");
+	private Matcher securityMatcher;
 	//Determine if the password does not contain white spaces
-	Pattern noWtSpc = Pattern.compile("\\s");
-	Matcher nWSMatcher;
+	Pattern noWhiteSpc = Pattern.compile("\\s");
+	private Matcher noWhiteSpcMatcher;
 	
 	public void register(ActionEvent e) {
 		
-		secMat = secPat.matcher(pw.getText());
-		nWSMatcher = noWtSpc.matcher(pw.getText());
+		securityMatcher = securityPattern.matcher(password.getText());
+		noWhiteSpcMatcher = noWhiteSpc.matcher(password.getText());
 		//Proxies for matchers because for reasons I don't know, once the find() function is called from a matcher, it immediately turns false for the next read
-		boolean secProxy = secMat.find();
-		boolean nWSMProxy = nWSMatcher.find();
+		boolean secProxy = securityMatcher.find();
+		boolean nWSMProxy = noWhiteSpcMatcher.find();
 		
-		if(pw2.getText().equals(pw.getText()) && secProxy && !nWSMProxy && pw.getText().length() >= 6 && !application.Main.loginInfo.containsKey(un.getText().toLowerCase())) {
+		if(password2.getText().equals(password.getText()) &&
+				secProxy && !nWSMProxy &&
+				password.getText().length() >= 6 &&
+				!application.Main.loginInfo.containsKey(username.getText().toLowerCase()) &&
+				username.getLength() > 3) {
 			//Called if registration is complete correctly
-			application.Main.loginInfo.put(un.getText().toLowerCase(), pw.getText());
-			pwrNoMatch.setText("Registered!");
+			application.Main.loginInfo.put(username.getText().toLowerCase(), password.getText());
+			registerError.setText("Registered!");
 			System.out.println(application.Main.loginInfo);
 			
-		}else if(!secProxy || pw.getLength() < 6 || nWSMProxy) {
-			pwrNoMatch.setText("Password does not meet\n requirements!");
-		}else if(!pw2.getText().equals(pw.getText())) {
-			pwrNoMatch.setText("Passwords do not match!");
-		}else if(application.Main.loginInfo.containsKey(un.getText())) {
-			pwrNoMatch.setText("Username already exists!");
-		}
+		//Executed if registration is not completed
+		}else if(!secProxy || password.getLength() < 6 || nWSMProxy) {
+			registerError.setText("Password does not meet\n requirements!");
+		}else if(!password2.getText().equals(password.getText())) {
+			registerError.setText("Passwords do not match!");
+		}else if(application.Main.loginInfo.containsKey(username.getText())) {
+			registerError.setText("Username already exists!");
+		}else registerError.setText("Username must be more than 3 characters!");
 		
 	}
 	

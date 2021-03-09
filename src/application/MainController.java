@@ -18,18 +18,18 @@ public class MainController {
 	JSONObject loginInfo = new JSONObject();
 	//Registration fields
 	@FXML
-	private PasswordField pw = new PasswordField();
+	private PasswordField password = new PasswordField();
 	@FXML
-	private TextField un = new TextField();
+	private TextField username = new TextField();
 	//Gives the user a message if they login successfully or not
 	@FXML
-	private Label attempt = new Label();
+	private Label loginText = new Label();
 	
 	//Action when login button is pressed
 	public void login(ActionEvent e) {
-		if(Main.loginInfo.containsKey(un.getText()) && Main.loginInfo.get(un.getText()).equals(pw.getText())) {
+		if(Main.loginInfo.containsKey(username.getText()) && Main.loginInfo.get(username.getText()).equals(password.getText())) {
 			loginSuccess();
-		}else if(Main.loginInfo.containsKey(un.getText())){
+		}else if(Main.loginInfo.containsKey(username.getText())){
 			loginFail("Incorrect password.");
 		}else {
 			loginFail("Username does not exist.");
@@ -37,14 +37,14 @@ public class MainController {
 	}
 	//Executed if login is successful
 	public void loginSuccess() {
-		attempt.setText("Logged in as: "+un.getText());
-		System.out.println("User Login: "+un.getText());
+		loginText.setText("Logged in as: "+username.getText());
+		System.out.println("User Login: "+username.getText());
 	}
 	//Executed if login fails
 	public void loginFail(String failReason) {
 		
-		attempt.setText("Login Failed: "+failReason);
-		System.out.println("Unsuccessful attempt to log into: "+un.getText());
+		loginText.setText("Login Failed: "+failReason);
+		System.out.println("Unsuccessful attempt to log into: "+username.getText());
 	}
 	//Action when register button is pressed
 	public void register(ActionEvent e) throws Exception {

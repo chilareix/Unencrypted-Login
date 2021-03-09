@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegisterController">
    <children>
-      <TextField fx:id="un" layoutX="98.0" layoutY="31.0" prefHeight="25.0" prefWidth="210.0" promptText="Username" />
-      <PasswordField fx:id="pw" layoutX="98.0" layoutY="66.0" prefHeight="25.0" prefWidth="210.0" promptText="Password" />
-      <PasswordField fx:id="pw2" layoutX="98.0" layoutY="100.0" prefHeight="25.0" prefWidth="210.0" promptText="Re-type Password" />
+      <TextField fx:id="username" layoutX="98.0" layoutY="31.0" prefHeight="25.0" prefWidth="210.0" promptText="Username" />
+      <PasswordField fx:id="password" layoutX="98.0" layoutY="66.0" prefHeight="25.0" prefWidth="210.0" promptText="Password" />
+      <PasswordField fx:id="password2" layoutX="98.0" layoutY="100.0" prefHeight="25.0" prefWidth="210.0" promptText="Re-type Password" />
       <Button fx:id="reg" layoutX="138.0" layoutY="211.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="125.0" text="Register" />
       <Label fx:id="pwrNoMatch" alignment="CENTER" layoutX="98.0" layoutY="143.0" prefHeight="45.0" prefWidth="210.0" textFill="RED" />
       <Label alignment="CENTER" layoutX="315.0" layoutY="104.0" prefHeight="17.0" prefWidth="17.0" text="?">

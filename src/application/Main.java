@@ -35,6 +35,7 @@ public class Main extends Application {
 			System.out.println("An error has occurred while creating a file: login.JSON");
 			e.printStackTrace();
 		}
+		
 		//Reads the login file to the variable
 		try {
 			loginInfo = (JSONObject) loginParser.parse(new FileReader("login.JSON"));
@@ -57,6 +58,7 @@ public class Main extends Application {
 		primaryStage.setTitle("Log in");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		//Writes login information to file when app is closed
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 		    @Override
 		    public void handle(WindowEvent e) {

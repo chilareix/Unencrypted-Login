@@ -16,6 +16,7 @@ public class User {
 		this.userName = un;
 		this.passWord = pw;
 	}
+	
 	//Getters and Setters
 	String getName() {
 		return this.Name;
@@ -26,14 +27,14 @@ public class User {
 	String getUsername() {
 		return this.userName;
 	}
-	void setUsername(String un) {
-		this.userName = un;
+	void setUsername(String username) {
+		this.userName = username;
 	}
 	String getPassword() {
 		return this.passWord;
 	}
-	void setPassword(String pw) {
-		this.passWord = pw;
+	void setPassword(String password) {
+		this.passWord = password;
 	}
 	
 }
