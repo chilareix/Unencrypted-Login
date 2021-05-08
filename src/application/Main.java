@@ -58,10 +58,12 @@ public class Main extends Application {
 		primaryStage.setTitle("Log in");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		primaryStage.setResizable(false);
 		//Writes login information to file when app is closed
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-		    @Override
+			@Override
 		    public void handle(WindowEvent e) {
+				System.out.println("Closing...");
 				try {
 					FileWriter jsonWriter = new FileWriter("login.JSON");
 					jsonWriter.write(loginInfo.toJSONString());
@@ -71,8 +73,8 @@ public class Main extends Application {
 					System.out.println("An error has occurred while writing to: login.JSON");
 					ex.printStackTrace();
 				}
-			     Platform.exit();
-			     System.exit(0);
+			    Platform.exit();
+			    System.exit(0);
 		    }
 		  });
 	}

@@ -19,12 +19,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class RegisterController {
 	
-	//Scene items so they can be altered 
+	//Scene items
 	@FXML
 	private PasswordField password = new PasswordField();
 	@FXML
@@ -57,10 +59,12 @@ public class RegisterController {
 				password.getText().length() >= 6 &&
 				!application.Main.loginInfo.containsKey(username.getText().toLowerCase()) &&
 				username.getLength() > 3) {
-			//Called if registration is complete correctly
+			//Called if registration is completed correctly
 			application.Main.loginInfo.put(username.getText().toLowerCase(), password.getText());
 			registerError.setText("Registered!");
 			System.out.println(application.Main.loginInfo);
+			Stage scn = (Stage)password.getScene().getWindow();
+			scn.close();
 			
 		//Executed if registration is not completed
 		}else if(!secProxy || password.getLength() < 6 || nWSMProxy) {
@@ -72,7 +76,44 @@ public class RegisterController {
 		}else registerError.setText("Username must be more than 3 characters!");
 		
 	}
-	
+	public void register() {
+		
+		securityMatcher = securityPattern.matcher(password.getText());
+		noWhiteSpcMatcher = noWhiteSpc.matcher(password.getText());
+		//Proxies for matchers because for reasons I don't know, once the find() function is called from a matcher, it immediately turns false for the next read
+		boolean secProxy = securityMatcher.find();
+		boolean nWSMProxy = noWhiteSpcMatcher.find();
+		
+		if(password2.getText().equals(password.getText()) &&
+				secProxy && !nWSMProxy &&
+				password.getText().length() >= 6 &&
+				!application.Main.loginInfo.containsKey(username.getText().toLowerCase()) &&
+				username.getLength() > 3) {
+			//Called if registration is completed correctly
+			application.Main.loginInfo.put(username.getText().toLowerCase(), password.getText());
+			registerError.setText("Registered!");
+			System.out.println(application.Main.loginInfo);
+			Stage scn = (Stage)password.getScene().getWindow();
+			scn.close();
+			
+		//Executed if registration is not completed
+		}else if(!secProxy || password.getLength() < 6 || nWSMProxy) {
+			registerError.setText("Password does not meet\n requirements!");
+		}else if(!password2.getText().equals(password.getText())) {
+			registerError.setText("Passwords do not match!");
+		}else if(application.Main.loginInfo.containsKey(username.getText())) {
+			registerError.setText("Username already exists!");
+		}else registerError.setText("Username must be more than 3 characters!");
+		
+	}
+	//Executed when keys are pressed
+	public void enterTyped(KeyEvent k) {
+		//Attempts to register user if ENTER is pressed
+		if(k.getCode().equals(KeyCode.ENTER)) {
+			register();
+		}
+		
+	}
 	
 	
 	//Creates new window for registration
@@ -84,5 +125,6 @@ public class RegisterController {
 		primaryStage.setTitle("Register");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		primaryStage.setResizable(false);
 	}
 }

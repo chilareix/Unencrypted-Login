@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import org.json.simple.*;
@@ -35,6 +37,22 @@ public class MainController {
 			loginFail("Username does not exist.");
 		}
 	}
+	public void login() {
+		if(Main.loginInfo.containsKey(username.getText()) && Main.loginInfo.get(username.getText()).equals(password.getText())) {
+			loginSuccess();
+		}else if(Main.loginInfo.containsKey(username.getText())){
+			loginFail("Incorrect password.");
+		}else {
+			loginFail("Username does not exist.");
+		}
+	}
+	//Executed when user presses ENTER
+	public void enterTyped(KeyEvent k) {
+		if(k.getCode().equals(KeyCode.ENTER)) {
+			login();
+		}
+	}
+	
 	//Executed if login is successful
 	public void loginSuccess() {
 		loginText.setText("Logged in as: "+username.getText());
